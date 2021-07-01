@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Session {
+public class User {
 
     @PrimaryKey
     public int uid;

@@ -8,16 +8,16 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface SessionDao {
+public interface UserDao {
 
     @Insert
-    void insert(Session session);
+    void insert(User user);
 
     @Delete
-    void delete(Session session);
+    void delete(User user);
 
-    @Query("SELECT * FROM session")
-    List<Session> getAllSessions();
+    @Query("SELECT * FROM User")
+    List<User> getAllSessions();
 
 
 }
