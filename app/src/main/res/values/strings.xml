@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_settings">Settings</string>
+    <string name="apply_changes">Apply Changes</string>
+    <string name="center_name">Center Name :</string>
+    <string name="center_address">Center Address :</string>
+    <string name="dose_1">DOSE 1 :</string>
+    <string name="dose_2">DOSE 2 :</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_pincode">Your Pincode</string>
 </resources>

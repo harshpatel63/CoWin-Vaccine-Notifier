@@ -25,7 +25,6 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        faltu();
     }
 
     public LiveData<String> getText() {
@@ -38,7 +37,7 @@ public class HomeViewModel extends ViewModel {
                 .getRetrofitInstance()
                 .create(CowinApiService.class);
 
-        Call<SessionClass> call = service.getSessions("396210", "01-07-2021");
+        Call<SessionClass> call = service.getSessions("396210", "04-07-2021");
 
         call.enqueue(new Callback<SessionClass>() {
             @Override

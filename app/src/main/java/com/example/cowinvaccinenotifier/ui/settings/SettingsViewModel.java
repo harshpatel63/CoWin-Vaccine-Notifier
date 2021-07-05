@@ -1,12 +1,33 @@
 package com.example.cowinvaccinenotifier.ui.settings;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class SettingsViewModel extends ViewModel {
+import com.example.cowinvaccinenotifier.db.User;
+import com.example.cowinvaccinenotifier.repository.MainRepository;
 
-    public SettingsViewModel() {
+import java.util.List;
+
+public class SettingsViewModel extends AndroidViewModel {
+
+    private MainRepository mainRepository;
+
+    public SettingsViewModel(Application application) {
+        super(application);
+        mainRepository = new MainRepository(application);
+    }
+
+    void changeData(int p, String n)
+    {
+        mainRepository.changeUserData(p, n);
+    }
+
+    Boolean checkPincode(int pin)
+    {
+        return pin > 0 && pin <= 999999;
     }
 
 }

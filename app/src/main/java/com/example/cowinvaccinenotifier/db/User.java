@@ -15,4 +15,12 @@ public class User {
 
    @ColumnInfo(name = "username")
    public String username;
+
+   public User(int pinocde, String username)
+   {
+       this.pincode = pinocde;
+       this.username =  username;
+   }
+
+   public User(){}
 }
