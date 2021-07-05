@@ -10,4 +10,6 @@
     <string name="dose_2">DOSE 2 :</string>
     <string name="your_name">Your Name</string>
     <string name="your_pincode">Your Pincode</string>
+    <string name="pincode">Pincode</string>
+    <string name="date">Date</string>
 </resources>
