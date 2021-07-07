@@ -39,7 +39,6 @@ public class HomeFragment extends Fragment {
         binding.recyclerViewHome.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerViewHome.setAdapter(adapter);
 
-
         homeViewModel.getSessionsData().observe(getViewLifecycleOwner(), new Observer<List<Sessions>>() {
             @Override
             public void onChanged(List<Sessions> sessions) {
@@ -51,8 +50,21 @@ public class HomeFragment extends Fragment {
         homeViewModel.getNullDataEvent().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(aBoolean)
-                    Toast.makeText(getContext(), "No data available for the current session", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "No data available for the current session", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        homeViewModel.getPincodeFromDb().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.pincodeHome.setText(s);
+            }
+        });
+
+        homeViewModel.getDateFromDevice().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.dateHome.setText(s);
             }
         });
 
