@@ -13,4 +13,8 @@ public class SessionClass {
     public List<Sessions> getSessions() {
         return sessions;
     }
+
+    public void setSessions(List<Sessions> input) {
+        sessions = input;
+    }
 }
