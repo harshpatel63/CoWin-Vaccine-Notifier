@@ -31,6 +31,20 @@ public class SettingsFragment extends Fragment {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        settingsViewModel.getPincodeDb().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.editPincode.setText(s);
+            }
+        });
+
+        settingsViewModel.getUsernameDb().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.editName.setText(s);
+            }
+        });
+
 
         binding.buttonApplyChanges.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -106,6 +106,11 @@ public class MainRepository {
         return String.valueOf(getUserFromDb().pincode);
     }
 
+    public String getUsernameFromDb()
+    {
+        return String.valueOf(getUserFromDb().username);
+    }
+
 
 
 private class getUserAsyncTask extends AsyncTask<Void, Void, User>

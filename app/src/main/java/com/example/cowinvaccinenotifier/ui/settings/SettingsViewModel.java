@@ -15,9 +15,16 @@ public class SettingsViewModel extends AndroidViewModel {
 
     private MainRepository mainRepository;
 
+    private MutableLiveData<String> pincodeDb;
+    private MutableLiveData<String> usernameDb;
+
     public SettingsViewModel(Application application) {
         super(application);
         mainRepository = new MainRepository(application);
+        pincodeDb = new MutableLiveData<>();
+        usernameDb = new MutableLiveData<>();
+        pincodeDb.setValue(mainRepository.getPincodeFromDb());
+        usernameDb.setValue(mainRepository.getUsernameFromDb());
     }
 
     void changeData(int p, String n)
@@ -29,5 +36,10 @@ public class SettingsViewModel extends AndroidViewModel {
     {
         return pin > 0 && pin <= 999999;
     }
+
+    public LiveData<String> getPincodeDb() { return pincodeDb; }
+    public LiveData<String> getUsernameDb() { return usernameDb; }
+
+
 
 }
