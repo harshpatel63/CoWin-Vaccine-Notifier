@@ -35,6 +35,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        binding.progressBar.setVisibility(View.VISIBLE);
+
         HomeAdapter adapter = new HomeAdapter();
         binding.recyclerViewHome.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerViewHome.setAdapter(adapter);
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getSessionsData().observe(getViewLifecycleOwner(), new Observer<List<Sessions>>() {
             @Override
             public void onChanged(List<Sessions> sessions) {
+                binding.progressBar.setVisibility(View.GONE);
                 Log.i("adgagasdg", "Why the heck is not working");
                 adapter.updateSessions(sessions);
             }

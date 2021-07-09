@@ -2,6 +2,7 @@ package com.example.cowinvaccinenotifier.repository;
 
 
 import android.app.Application;
+import android.os.AsyncTask;
 import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import com.example.cowinvaccinenotifier.db.AppDatabase;
@@ -15,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,10 +59,6 @@ public class MainRepository {
 
     public MutableLiveData<List<Sessions>> getSessionsFromNetwork()
     {
-        final String[] pincode = new String[1];
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-                    pincode[0] = String.valueOf(getUserFromDb().pincode);
-                });
 
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String date = df.format(Calendar.getInstance().getTime());
@@ -71,7 +70,7 @@ public class MainRepository {
                 .getRetrofitInstance()
                 .create(CowinApiService.class);
 
-        Call<SessionClass> call = service.getSessions(pincode[0], date);
+        Call<SessionClass> call = service.getSessions(getPincodeFromDb(), date);
 
         call.enqueue(new Callback<SessionClass>() {
             @Override
@@ -90,13 +89,32 @@ public class MainRepository {
             return data;
     }
 
-    private User getUserFromDb()
+    private User getUserFromDb(){
+        try {
+            return new getUserAsyncTask().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new User();
+    }
+
+
+    public String getPincodeFromDb()
     {
-        return userDao.getAllSessions();
+        return String.valueOf(getUserFromDb().pincode);
     }
 
 
 
+private class getUserAsyncTask extends AsyncTask<Void, Void, User>
+{
 
+    @Override
+    protected User doInBackground(Void... voids) {
+        return userDao.getAllSessions();
+    }
+}
 
 }

@@ -45,7 +45,7 @@ public class HomeViewModel extends AndroidViewModel {
         pincodeFromDb = new MutableLiveData<>();
         dateFromDevice = new MutableLiveData<>();
         nullDataEvent.setValue(false);
-        pincodeFromDb.setValue("396220");
+        pincodeFromDb.setValue(mainRepository.getPincodeFromDb());
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         dateFromDevice.setValue(df.format(Calendar.getInstance().getTime()));
         sessionsData = mainRepository.getSessionsFromNetwork();
