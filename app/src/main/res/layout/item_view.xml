@@ -108,27 +108,30 @@
         android:orientation="horizontal">
 
 
-<ImageView
-    android:id="@+id/price_tag"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/free_tag"
-    android:layout_marginStart="8dp"
-    />
+        <ImageView
+            android:id="@+id/age_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/eighteen_tag"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:id="@+id/price_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/free_tag"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center"
+            />
 
         <ImageView
             android:id="@+id/vaccine_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/free_tag"
+            tools:src="@drawable/sputnik_tag"
             android:layout_marginStart="8dp"
-            />
-        <ImageView
-            android:id="@+id/age_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/free_tag"
-            android:layout_marginStart="8dp"
+            android:layout_gravity="center"
             />
 
 
