@@ -136,12 +136,16 @@ public class MainRepository {
 
     public String getPincodeFromDb()
     {
+        if(getUserFromDb()!=null)
         return String.valueOf(getUserFromDb().pincode);
+        return "";
     }
 
     public String getUsernameFromDb()
     {
+        if(getUserFromDb()!=null)
         return String.valueOf(getUserFromDb().username);
+        return "";
     }
 
 

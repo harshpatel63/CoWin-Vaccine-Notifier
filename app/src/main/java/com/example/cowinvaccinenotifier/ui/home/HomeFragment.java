@@ -14,9 +14,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cowinvaccinenotifier.MainActivity;
+import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.adapters.HomeAdapter;
 import com.example.cowinvaccinenotifier.databinding.FragmentHomeBinding;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
@@ -66,7 +69,13 @@ public class HomeFragment extends Fragment {
         homeViewModel.getPincodeFromDb().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                binding.pincodeHome.setText(s);
+                if(s!="")
+                    binding.pincodeHome.setText(s);
+                else
+                {
+                    NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                    navController.navigate(R.id.action_navigation_home_to_navigation_settings);
+                }
             }
         });
 
