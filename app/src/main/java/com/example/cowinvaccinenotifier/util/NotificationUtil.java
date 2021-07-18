@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
@@ -24,7 +25,8 @@ public class NotificationUtil{
 
     public static void sendNotification(String messageBody, Context context)
         {
-        Intent contentIntent = new Intent(context, MainActivity.class);
+        Intent contentIntent = new Intent(Intent.ACTION_VIEW);
+        contentIntent.setData(Uri.parse("https://selfregistration.cowin.gov.in/"));
 
             PendingIntent contentPendingIntent = PendingIntent.getActivity(
                     context,

@@ -27,6 +27,8 @@ public class MainRepository {
     private UserDao userDao;
     private CowinApiService networkService;
 
+    private List<Sessions> dataSet;
+
     public MainRepository(Application application)
     {
         //Setup for Database DAO
@@ -51,8 +53,39 @@ public class MainRepository {
             }
             userDao.insert(newUser);
         });
+    }
 
+    public List<Sessions> getListOfSessionsFromNetwork()
+    {
+        amej();
+        return dataSet;
+    }
 
+    private void amej()
+    {
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        String date = df.format(Calendar.getInstance().getTime());
+
+        CowinApiService service = RetrofitClientInstance
+                .getRetrofitInstance()
+                .create(CowinApiService.class);
+
+        Call<SessionClass> call = service.getSessions(getPincodeFromDb(), date);
+
+        call.enqueue(new Callback<SessionClass>() {
+            @Override
+            public void onResponse(Call<SessionClass> call, Response<SessionClass> response) {
+                Log.i("networkRequest","Inside onResponse ");
+//                Log.i("networkRequest", ""+response.body().getSessions().get(0).getAddress());
+                if(response.body() != null)
+                   dataSet = response.body().getSessions();
+            }
+
+            @Override
+            public void onFailure(Call<SessionClass> call, Throwable t) {
+                Log.i("networkRequest", "on Failure is this "+t.getMessage());
+            }
+        });
     }
 
 

@@ -16,12 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.example.cowinvaccinenotifier.MainActivity;
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
 import com.example.cowinvaccinenotifier.repository.MainRepository;
+import com.example.cowinvaccinenotifier.util.NotificationUtil;
 
 import java.util.List;
 
@@ -31,8 +35,6 @@ public class TrackingService extends Service {
     final static String NOTIFICATION_CHANNEL_NAME = "Tracking";
     final int NOTIFICATION_ID = 1;
 
-    private MutableLiveData<List<Sessions>> sessionData;
-    private LiveData<List<Sessions>> sessionList;
     private MainRepository mainRepository;
 
 
@@ -57,7 +59,8 @@ public class TrackingService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
         startForeground(NOTIFICATION_ID, notification);
-        startNetworkCalls();
+        mainRepository = new MainRepository(getApplication());
+        startNetworkCalls(mainRepository);
 
         return super.onStartCommand(intent, flags, startId);
 
@@ -70,15 +73,31 @@ public class TrackingService extends Service {
         return super.stopService(name);
     }
 
-    private void startNetworkCalls()
+    private void startNetworkCalls(MainRepository repository)
     {
         final Handler handler = new Handler();
         final int delay = 4000; // 1000 milliseconds == 1 second
 
+
         handler.postDelayed(new Runnable() {
             public void run() {
-
                 Log.i("refresher", "hi");
+
+                List<Sessions> data = mainRepository.getListOfSessionsFromNetwork();
+
+                if(data != null) {
+                    int availableDoses = 0;
+
+                    for (int i = 0; i < data.size(); i++) {
+                        availableDoses += data.get(i).getAvailableCapacity();
+                    }
+
+                    Log.i("available doses", "" + availableDoses);
+                    NotificationUtil.sendNotification("Hey, "+availableDoses+" vaccines are available in your area", getApplicationContext());
+                }
+                else
+                    Log.i("available doses", "data is null");
+
                 handler.postDelayed(this, delay);
             }
         }, delay);
