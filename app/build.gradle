@@ -65,4 +65,6 @@ dependencies {
     //javax annotation processing
     implementation 'org.glassfish:javax.annotation:10.0-b28'
 
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.8'
+
 }
