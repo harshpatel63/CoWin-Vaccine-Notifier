@@ -86,15 +86,35 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        homeViewModel.getTrackingStatus().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean == null || !aBoolean)
+                    binding.buttonService.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                else
+                    binding.buttonService.setImageResource(R.drawable.ic_baseline_stop_24);
+            }
+        });
+
         binding.buttonService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("click", "I clicked");
-                Intent service = new Intent(getActivity(), TrackingService.class);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                    startForegroundService(getActivity(), service);
+
+                if(TrackingService.isTracking.getValue() == null || !TrackingService.isTracking.getValue())
+                {
+                    Log.i("click", "I clicked");
+                    Intent service = new Intent(getActivity(), TrackingService.class);
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                        startForegroundService(getActivity(), service);
+                    else
+                        getActivity().startService(service);
+                }
                 else
-                    getActivity().startService(service);
+                {
+                        getActivity().stopService(new Intent(getActivity(), TrackingService.class));
+                }
+
+
             }
         });
 

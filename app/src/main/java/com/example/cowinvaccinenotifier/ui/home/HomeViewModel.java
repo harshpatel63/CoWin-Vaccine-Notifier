@@ -68,6 +68,8 @@ public class HomeViewModel extends AndroidViewModel {
 
     public LiveData<String> getDateFromDevice() { return dateFromDevice; }
 
+    public LiveData<Boolean> getTrackingStatus() {return TrackingService.isTracking; }
+
     public void updateData()
     {
         Log.i("hga", "slfj");
