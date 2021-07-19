@@ -1,6 +1,9 @@
 package com.example.cowinvaccinenotifier.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,7 +46,21 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        binding.progressBar.setVisibility(View.VISIBLE);
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(isConnected)
+            binding.progressBar.setVisibility(View.VISIBLE);
+        else
+        {
+            new NoInternetDialogFragment().show(
+                    getChildFragmentManager(),
+                    "NoInternetDialogFragment"
+            );
+        }
 
         HomeAdapter adapter = new HomeAdapter();
         binding.recyclerViewHome.setLayoutManager(new LinearLayoutManager(getContext()));
