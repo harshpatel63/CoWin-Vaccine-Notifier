@@ -70,8 +70,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Sessions> sessions) {
                 binding.progressBar.setVisibility(View.GONE);
-                Log.i("adgagasdg", "Why the heck is not working");
-                adapter.updateSessions(sessions);
+                Log.i("HomeFragment", ""+sessions.size());
+                if(sessions.size()>0){
+                    binding.textNoSlots.setVisibility(View.GONE);
+                    binding.recyclerViewHome.setVisibility(View.VISIBLE);
+                    adapter.updateSessions(sessions);
+                } else {
+                    binding.textNoSlots.setVisibility(View.VISIBLE);
+                    binding.recyclerViewHome.setVisibility(View.GONE);
+                }
             }
         });
 
