@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,13 +31,33 @@ public class StatisticsFragment extends Fragment {
         binding = FragmentStatisticsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        statisticsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//        final TextView textView = binding.textDashboard;
+//        statisticsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+
+        WebSettings webSettings = binding.webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        binding.webView.setWebViewClient(new WebViewClient()
+        {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
             }
+
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                binding.webView.loadUrl("javascript:(function() { " +
+//                        "document.getElementById('skip_to_main'); " +
+//                        "})()");
+//            }
         });
+        binding.webView.loadUrl("https://dashboard.cowin.gov.in");
+
         return root;
     }
 
