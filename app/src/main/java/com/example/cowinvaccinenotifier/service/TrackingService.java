@@ -80,7 +80,7 @@ public class TrackingService extends Service {
         getApplication().stopService(new Intent(this, TrackingService.class));
         isTracking.setValue(false);
         stopForeground(true);
-        Log.i("kill Service", "inside kill service");
+        Log.i("TrackingService", "inside kill service");
         stopSelf();
     }
 
@@ -109,7 +109,6 @@ public class TrackingService extends Service {
                 }
 
                 if(isTracking.getValue()){
-                    Log.i("refresher", "hi");
 
                     List<Sessions> data = mainRepository.getListOfSessionsFromNetwork();
 
@@ -120,11 +119,11 @@ public class TrackingService extends Service {
                             availableDoses += data.get(i).getAvailableCapacity();
                         }
 
-                        Log.i("available doses", "" + availableDoses);
+                        Log.i("TrackingService", "Available Doses: " + availableDoses);
                         if (availableDoses > 0)
                             NotificationUtil.sendNotification("Hey, " + availableDoses + " vaccines are available in your area", getApplicationContext());
                     } else
-                        Log.i("available doses", "data is null");
+                        Log.i("TrackingService", "data is null");
                     handler.postDelayed(this, delay);
                 }
                 else

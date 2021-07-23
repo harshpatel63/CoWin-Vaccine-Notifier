@@ -46,7 +46,7 @@ public class MainRepository {
 
         AppDatabase.databaseWriteExecutor.execute(() -> {
             User newUser = new User(p, n, vl, fl, al);
-            Log.i("asdgadsg", ""+userDao.getCount());
+            Log.i("changeUserData", ""+userDao.getCount());
             if(userDao.getCount() > 0) {
                 User oldUser = userDao.getAllSessions();
                 userDao.delete(oldUser);
@@ -70,7 +70,6 @@ public class MainRepository {
             @Override
             public void onResponse(Call<SessionClass> call, Response<SessionClass> response) {
                 Log.i("networkRequest","Inside onResponse ");
-//                Log.i("networkRequest", ""+response.body().getSessions().get(0).getAddress());
                 if(response.body() != null) {
 
                     List<Sessions> receivedData = response.body().getSessions();
@@ -117,7 +116,6 @@ public class MainRepository {
             @Override
             public void onResponse(Call<SessionClass> call, Response<SessionClass> response) {
                 Log.i("networkRequest","Inside onResponse ");
-//                Log.i("networkRequest", ""+response.body().getSessions().get(0).getAddress());
                 if(response.body() != null) {
 
                     List<Sessions> receivedData = response.body().getSessions();

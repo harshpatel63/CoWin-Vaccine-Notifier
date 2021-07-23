@@ -6,10 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
 import java.util.ArrayList;
@@ -113,14 +110,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     public void updateSessions(List<Sessions> newList)
     {
-
-        Log.i("nullPointerException", "This is null");
-
             dataSet.clear();
             dataSet.addAll(newList);
             notifyDataSetChanged();
-
-            Log.i("nullPointerException", "This is null");
     }
 
 

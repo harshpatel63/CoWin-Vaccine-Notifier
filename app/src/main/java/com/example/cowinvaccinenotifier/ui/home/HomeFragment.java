@@ -119,7 +119,6 @@ public class HomeFragment extends Fragment {
 
                 if(TrackingService.isTracking.getValue() == null || !TrackingService.isTracking.getValue())
                 {
-                    Log.i("click", "I clicked");
                     Intent service = new Intent(getActivity(), TrackingService.class);
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                         startForegroundService(getActivity(), service);

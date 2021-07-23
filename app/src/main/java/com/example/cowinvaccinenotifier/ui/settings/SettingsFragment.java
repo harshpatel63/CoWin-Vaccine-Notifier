@@ -82,7 +82,7 @@ public class SettingsFragment extends Fragment {
                     pincode = Integer.parseInt(pincodeStr);
                 } catch (NumberFormatException e)
                 {
-                    Log.i("pincode", "exeception caught");
+                    Log.i("SettingsFragment", "exeception caught");
                 }
 
                 String nameStr = Objects.requireNonNull(binding.editName.getText()).toString();

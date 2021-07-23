@@ -55,9 +55,4 @@ public class HomeViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getTrackingStatus() {return TrackingService.isTracking; }
 
-    public void updateData()
-    {
-        Log.i("hga", "slfj");
-        sessionsData = mainRepository.getSessionsFromNetwork();
-    }
 }
