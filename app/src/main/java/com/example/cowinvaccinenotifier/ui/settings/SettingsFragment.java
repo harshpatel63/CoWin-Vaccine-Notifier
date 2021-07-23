@@ -1,5 +1,6 @@
 package com.example.cowinvaccinenotifier.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.navigation.Navigation;
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.databinding.FragmentSettingsBinding;
 import com.example.cowinvaccinenotifier.databinding.ItemBottomSheetContainerBinding;
+import com.example.cowinvaccinenotifier.service.TrackingService;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -107,6 +109,7 @@ public class SettingsFragment extends Fragment {
 
                 if(settingsViewModel.checkPincode(pincode) && settingsViewModel.checkLists(vaccineList, ageList, feeList))
                 {
+                    getActivity().stopService(new Intent(getActivity(), TrackingService.class));
                     settingsViewModel.changeData(pincode, nameStr, vaccineList, feeList, ageList);
                     NavController navController = Navigation.findNavController(
                             getActivity(), R.id.nav_host_fragment_activity_main
