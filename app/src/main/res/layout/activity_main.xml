@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/nav_view"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="0dp"-->
-<!--        android:layout_marginEnd="0dp"-->
-<!--        android:background="?android:attr/windowBackground"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:menu="@menu/bottom_nav_menu" />-->
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
@@ -24,7 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:indicatorRadius="16dp"
-        app:textSize="16sp"
+        app:textSize="14sp"
         app:iconSize="30dp"
         app:backgroundColor="@color/design_default_color_primary"
         app:menu="@menu/bottom_nav_menu"/>
