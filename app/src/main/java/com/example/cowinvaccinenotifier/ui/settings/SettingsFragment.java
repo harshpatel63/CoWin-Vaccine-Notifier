@@ -146,14 +146,29 @@ public class SettingsFragment extends Fragment {
         ArrayList<String> ageList = viewModel.getAgeListDb().getValue();
         ArrayList<String> feeList = viewModel.getFeeListDb().getValue();
 
-        bs.checkboxEighteen.setChecked(ageList.contains("18"));
-        bs.checkboxFortyFive.setChecked(ageList.contains("45"));
-        bs.checkboxFree.setChecked(feeList.contains("Free"));
-        bs.checkboxPaid.setChecked(feeList.contains("Paid"));
-        bs.checkboxCovishield.setChecked(vaccineList.contains(getString(R.string.covishield)));
-        bs.checkboxCovaxin.setChecked(vaccineList.contains(getString(R.string.covaxin)));
-        bs.checkboxModerna.setChecked(vaccineList.contains(getString(R.string.moderna)));
-        bs.checkboxSputnikV.setChecked(vaccineList.contains(getString(R.string.sputnik_v)));
+        if(vaccineList == null && ageList == null && feeList == null)
+        {
+            //First time login in the app
+            bs.checkboxEighteen.setChecked(true);
+            bs.checkboxFortyFive.setChecked(true);
+            bs.checkboxFree.setChecked(true);
+            bs.checkboxPaid.setChecked(true);
+            bs.checkboxCovishield.setChecked(true);
+            bs.checkboxCovaxin.setChecked(true);
+            bs.checkboxModerna.setChecked(true);
+            bs.checkboxSputnikV.setChecked(true);
+
+        }
+        else {
+            bs.checkboxEighteen.setChecked(ageList.contains("18"));
+            bs.checkboxFortyFive.setChecked(ageList.contains("45"));
+            bs.checkboxFree.setChecked(feeList.contains("Free"));
+            bs.checkboxPaid.setChecked(feeList.contains("Paid"));
+            bs.checkboxCovishield.setChecked(vaccineList.contains(getString(R.string.covishield)));
+            bs.checkboxCovaxin.setChecked(vaccineList.contains(getString(R.string.covaxin)));
+            bs.checkboxModerna.setChecked(vaccineList.contains(getString(R.string.moderna)));
+            bs.checkboxSputnikV.setChecked(vaccineList.contains(getString(R.string.sputnik_v)));
+        }
 
     }
 
