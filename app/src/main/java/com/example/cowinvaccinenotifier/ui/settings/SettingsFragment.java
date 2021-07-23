@@ -2,15 +2,18 @@ package com.example.cowinvaccinenotifier.ui.settings;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,6 +22,7 @@ import androidx.navigation.Navigation;
 
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.databinding.FragmentSettingsBinding;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Objects;
 
@@ -34,6 +38,21 @@ public class SettingsFragment extends Fragment {
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetParent.getRoot());
+        bottomSheetBehavior.setPeekHeight(150,true);
+
+        LinearLayout layouMisc = binding.bottomSheetParent.layoutMisc;
+
+        layouMisc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                else if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED)
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
 
         settingsViewModel.getPincodeDb().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

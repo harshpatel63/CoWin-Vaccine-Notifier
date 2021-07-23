@@ -57,12 +57,6 @@ public class MainRepository {
 
     public List<Sessions> getListOfSessionsFromNetwork()
     {
-        amej();
-        return dataSet;
-    }
-
-    private void amej()
-    {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String date = df.format(Calendar.getInstance().getTime());
 
@@ -86,6 +80,7 @@ public class MainRepository {
                 Log.i("networkRequest", "on Failure is this "+t.getMessage());
             }
         });
+        return dataSet;
     }
 
 
