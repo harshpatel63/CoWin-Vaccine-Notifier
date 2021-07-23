@@ -1,32 +1,17 @@
 package com.example.cowinvaccinenotifier.ui.home;
 
 import android.app.Application;
-import android.content.Intent;
 import android.util.Log;
-
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import com.example.cowinvaccinenotifier.network.CowinApiService;
-import com.example.cowinvaccinenotifier.network.RetrofitClientInstance;
-import com.example.cowinvaccinenotifier.network.properties.SessionClass;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
 import com.example.cowinvaccinenotifier.repository.MainRepository;
 import com.example.cowinvaccinenotifier.service.TrackingService;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
-import kotlin.Result;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class HomeViewModel extends AndroidViewModel {
 

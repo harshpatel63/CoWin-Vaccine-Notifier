@@ -1,19 +1,13 @@
-package com.example.cowinvaccinenotifier;
+package com.example.cowinvaccinenotifier.ui;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.PopupMenu;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
+import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

@@ -12,10 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
-
-import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 

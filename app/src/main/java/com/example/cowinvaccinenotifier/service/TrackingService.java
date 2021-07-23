@@ -1,32 +1,24 @@
 package com.example.cowinvaccinenotifier.service;
-import android.app.Application;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-
-import com.example.cowinvaccinenotifier.MainActivity;
+import com.example.cowinvaccinenotifier.ui.MainActivity;
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
 import com.example.cowinvaccinenotifier.repository.MainRepository;
 import com.example.cowinvaccinenotifier.util.NotificationUtil;
-
 import java.util.List;
 
 public class TrackingService extends Service {

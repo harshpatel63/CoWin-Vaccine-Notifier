@@ -3,30 +3,21 @@ package com.example.cowinvaccinenotifier.ui.settings;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.databinding.FragmentSettingsBinding;
 import com.example.cowinvaccinenotifier.databinding.ItemBottomSheetContainerBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -114,7 +105,7 @@ public class SettingsFragment extends Fragment {
                     vaccineList.add(getString(R.string.sputnik_v));
 
 
-                if(settingsViewModel.checkPincode(pincode))
+                if(settingsViewModel.checkPincode(pincode) && settingsViewModel.checkLists(vaccineList, ageList, feeList))
                 {
                     settingsViewModel.changeData(pincode, nameStr, vaccineList, feeList, ageList);
                     NavController navController = Navigation.findNavController(
@@ -130,10 +121,14 @@ public class SettingsFragment extends Fragment {
                         }
                     }, 500);
                 }
+                else if(!settingsViewModel.checkPincode(pincode))
+                {
+                    Toast.makeText(getActivity(), "Invalid Pincode.", Toast.LENGTH_LONG).show();
+                    binding.editPincode.setError("Invalid Pincode");
+                }
                 else
                 {
-                    Toast.makeText(getActivity(), "Invalid Pincode.", Toast.LENGTH_SHORT).show();
-                    binding.editPincode.setError("Invalid Pincode");
+                    Toast.makeText(getActivity(), "Please select proper filter options.", Toast.LENGTH_LONG).show();
                 }
             }
         });

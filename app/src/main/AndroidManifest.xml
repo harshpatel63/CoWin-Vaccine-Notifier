@@ -16,7 +16,7 @@
         android:theme="@style/Theme.CoWinVaccineNotifier">
         <service android:name=".service.TrackingService"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -18,7 +18,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,10 +84,7 @@ public class MainRepository {
                                 getVaccineListFromDb().contains(curr.getVaccine()))
                             filteredData.add(curr);
                     }
-                    if(!filteredData.isEmpty())
-                        dataSet = filteredData;
-                    else
-                        dataSet = receivedData;
+                    dataSet = filteredData;
                 }
             }
 
@@ -135,10 +131,7 @@ public class MainRepository {
                         getVaccineListFromDb().contains(curr.getVaccine()))
                             filteredData.add(curr);
                     }
-                    if(!filteredData.isEmpty())
-                        data.setValue(filteredData);
-                    else
-                        data.setValue(receivedData);
+                    data.setValue(filteredData);
                 }
             }
 

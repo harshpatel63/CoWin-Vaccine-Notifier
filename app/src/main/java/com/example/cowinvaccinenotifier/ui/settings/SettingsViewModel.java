@@ -1,16 +1,11 @@
 package com.example.cowinvaccinenotifier.ui.settings;
 
 import android.app.Application;
-
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.example.cowinvaccinenotifier.db.User;
 import com.example.cowinvaccinenotifier.repository.MainRepository;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class SettingsViewModel extends AndroidViewModel {
 
@@ -54,5 +49,9 @@ public class SettingsViewModel extends AndroidViewModel {
     public LiveData<ArrayList<String>> getFeeListDb() { return feeList; }
 
 
-
+    public boolean checkLists(ArrayList<String> vaccineList, ArrayList<String> ageList, ArrayList<String> feeList) {
+        if(vaccineList.isEmpty() || ageList.isEmpty() || feeList.isEmpty())
+            return false;
+        return true;
+    }
 }

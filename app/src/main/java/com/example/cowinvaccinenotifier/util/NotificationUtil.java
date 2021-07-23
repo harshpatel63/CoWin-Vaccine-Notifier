@@ -9,12 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-
-import com.example.cowinvaccinenotifier.MainActivity;
 import com.example.cowinvaccinenotifier.R;
 
 public class NotificationUtil{

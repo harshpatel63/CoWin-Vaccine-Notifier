@@ -2,10 +2,6 @@ package com.example.cowinvaccinenotifier.network;
 
 
 import com.example.cowinvaccinenotifier.network.properties.SessionClass;
-import com.example.cowinvaccinenotifier.network.properties.Sessions;
-
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
