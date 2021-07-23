@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.cowinvaccinenotifier.db.User;
 import com.example.cowinvaccinenotifier.repository.MainRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsViewModel extends AndroidViewModel {
@@ -17,19 +18,28 @@ public class SettingsViewModel extends AndroidViewModel {
 
     private MutableLiveData<String> pincodeDb;
     private MutableLiveData<String> usernameDb;
+    private MutableLiveData<ArrayList<String>> vaccineList;
+    private MutableLiveData<ArrayList<String>> ageList;
+    private MutableLiveData<ArrayList<String>> feeList;
 
     public SettingsViewModel(Application application) {
         super(application);
         mainRepository = new MainRepository(application);
         pincodeDb = new MutableLiveData<>();
         usernameDb = new MutableLiveData<>();
+        vaccineList = new MutableLiveData<>();
+        ageList = new MutableLiveData<>();
+        feeList = new MutableLiveData<>();
         pincodeDb.setValue(mainRepository.getPincodeFromDb());
         usernameDb.setValue(mainRepository.getUsernameFromDb());
+        vaccineList.setValue(mainRepository.getVaccineListFromDb());
+        ageList.setValue(mainRepository.getAgeListFromDb());
+        feeList.setValue(mainRepository.getFeesListFromDb());
     }
 
-    void changeData(int p, String n)
+    void changeData(int p, String n, ArrayList<String> vl, ArrayList<String> fl, ArrayList<String> al)
     {
-        mainRepository.changeUserData(p, n);
+        mainRepository.changeUserData(p, n, vl, fl, al);
     }
 
     Boolean checkPincode(int pin)
@@ -39,6 +49,9 @@ public class SettingsViewModel extends AndroidViewModel {
 
     public LiveData<String> getPincodeDb() { return pincodeDb; }
     public LiveData<String> getUsernameDb() { return usernameDb; }
+    public LiveData<ArrayList<String>> getVaccineListDb() { return vaccineList; }
+    public LiveData<ArrayList<String>> getAgeListDb() { return ageList; }
+    public LiveData<ArrayList<String>> getFeeListDb() { return feeList; }
 
 
 

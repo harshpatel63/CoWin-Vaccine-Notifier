@@ -13,4 +13,8 @@
     <string name="pincode">Pincode</string>
     <string name="date">Date</string>
     <string name="cowin_service_notification_channel_id">cowin_channel</string>
+    <string name="covishield">COVISHIELD</string>
+    <string name="covaxin">COVAXIN</string>
+    <string name="moderna">MODERNA</string>
+    <string name="sputnik_v">SPUTNIK-V</string>
 </resources>

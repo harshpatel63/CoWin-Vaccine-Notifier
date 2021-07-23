@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+
 @Entity
 public class User {
 
@@ -16,10 +18,22 @@ public class User {
    @ColumnInfo(name = "username")
    public String username;
 
-   public User(int pinocde, String username)
+   @ColumnInfo(name = "vaccines")
+   public ArrayList<String> vaccines;
+
+    @ColumnInfo(name = "fees")
+    public ArrayList<String> fees;
+
+    @ColumnInfo(name = "age")
+    public ArrayList<String> age;
+
+   public User(int pinocde, String username, ArrayList<String> vaccines, ArrayList<String> fees, ArrayList<String> age)
    {
        this.pincode = pinocde;
        this.username =  username;
+       this.vaccines = vaccines;
+       this.fees = fees;
+       this.age = age;
    }
 
    public User(){}

@@ -71,4 +71,7 @@ dependencies {
     //material.io by google
     implementation 'com.google.android.material:material:1.4.0'
 
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
 }

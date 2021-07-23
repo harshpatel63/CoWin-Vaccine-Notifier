@@ -1,11 +1,13 @@
 package com.example.cowinvaccinenotifier.ui.settings;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,14 +24,19 @@ import androidx.navigation.Navigation;
 
 import com.example.cowinvaccinenotifier.R;
 import com.example.cowinvaccinenotifier.databinding.FragmentSettingsBinding;
+import com.example.cowinvaccinenotifier.databinding.ItemBottomSheetContainerBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SettingsFragment extends Fragment {
 
     private SettingsViewModel settingsViewModel;
     private FragmentSettingsBinding binding;
+    ArrayList<String> ageList = new ArrayList<>();
+    ArrayList<String> feeList = new ArrayList<>();
+    ArrayList<String> vaccineList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,11 +47,12 @@ public class SettingsFragment extends Fragment {
         View root = binding.getRoot();
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetParent.getRoot());
-        bottomSheetBehavior.setPeekHeight(150,true);
+        bottomSheetBehavior.setPeekHeight(200,true);
+        ItemBottomSheetContainerBinding bs = binding.bottomSheetParent;
 
-        LinearLayout layouMisc = binding.bottomSheetParent.layoutMisc;
+        LinearLayout layoutMisc = binding.bottomSheetParent.layoutMisc;
 
-        layouMisc.setOnClickListener(new View.OnClickListener() {
+        layoutMisc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
@@ -68,6 +76,8 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        setChecksInCheckbox(bs, settingsViewModel);
+
 
         binding.buttonApplyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,14 +95,40 @@ public class SettingsFragment extends Fragment {
                 }
 
                 String nameStr = Objects.requireNonNull(binding.editName.getText()).toString();
+
+                if(bs.checkboxEighteen.isChecked())
+                    ageList.add("18");
+                if(bs.checkboxFortyFive.isChecked())
+                    ageList.add("45");
+                if(bs.checkboxFree.isChecked())
+                    feeList.add("Free");
+                if(bs.checkboxPaid.isChecked())
+                    feeList.add("Paid");
+                if(bs.checkboxCovishield.isChecked())
+                    vaccineList.add(getString(R.string.covishield));
+                if(bs.checkboxCovaxin.isChecked())
+                    vaccineList.add(getString(R.string.covaxin));
+                if(bs.checkboxModerna.isChecked())
+                    vaccineList.add(getString(R.string.moderna));
+                if(bs.checkboxSputnikV.isChecked())
+                    vaccineList.add(getString(R.string.sputnik_v));
+
+
                 if(settingsViewModel.checkPincode(pincode))
                 {
-                    settingsViewModel.changeData(pincode, nameStr);
+                    settingsViewModel.changeData(pincode, nameStr, vaccineList, feeList, ageList);
                     NavController navController = Navigation.findNavController(
                             getActivity(), R.id.nav_host_fragment_activity_main
                     );
                     Toast.makeText(getContext(), "Data stored successfully", Toast.LENGTH_SHORT).show();
-                    navController.navigate(R.id.action_navigation_settings_to_navigation_home);
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            navController.navigate(R.id.action_navigation_settings_to_navigation_home);
+                        }
+                    }, 500);
                 }
                 else
                 {
@@ -103,6 +139,22 @@ public class SettingsFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void setChecksInCheckbox(ItemBottomSheetContainerBinding bs, SettingsViewModel viewModel) {
+        ArrayList<String> vaccineList = viewModel.getVaccineListDb().getValue();
+        ArrayList<String> ageList = viewModel.getAgeListDb().getValue();
+        ArrayList<String> feeList = viewModel.getFeeListDb().getValue();
+
+        bs.checkboxEighteen.setChecked(ageList.contains("18"));
+        bs.checkboxFortyFive.setChecked(ageList.contains("45"));
+        bs.checkboxFree.setChecked(feeList.contains("Free"));
+        bs.checkboxPaid.setChecked(feeList.contains("Paid"));
+        bs.checkboxCovishield.setChecked(vaccineList.contains(getString(R.string.covishield)));
+        bs.checkboxCovaxin.setChecked(vaccineList.contains(getString(R.string.covaxin)));
+        bs.checkboxModerna.setChecked(vaccineList.contains(getString(R.string.moderna)));
+        bs.checkboxSputnikV.setChecked(vaccineList.contains(getString(R.string.sputnik_v)));
+
     }
 
     @Override

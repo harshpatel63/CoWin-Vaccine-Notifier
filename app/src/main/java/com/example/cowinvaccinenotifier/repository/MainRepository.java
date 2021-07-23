@@ -13,6 +13,7 @@ import com.example.cowinvaccinenotifier.network.RetrofitClientInstance;
 import com.example.cowinvaccinenotifier.network.properties.SessionClass;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -41,11 +42,11 @@ public class MainRepository {
                 .create(CowinApiService.class);
     }
 
-    public void changeUserData(int p, String n)
+    public void changeUserData(int p, String n, ArrayList<String> vl, ArrayList<String> fl, ArrayList<String> al)
     {
 
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            User newUser = new User(p, n);
+            User newUser = new User(p, n, vl, fl, al);
             Log.i("asdgadsg", ""+userDao.getCount());
             if(userDao.getCount() > 0) {
                 User oldUser = userDao.getAllSessions();
@@ -71,8 +72,24 @@ public class MainRepository {
             public void onResponse(Call<SessionClass> call, Response<SessionClass> response) {
                 Log.i("networkRequest","Inside onResponse ");
 //                Log.i("networkRequest", ""+response.body().getSessions().get(0).getAddress());
-                if(response.body() != null)
-                   dataSet = response.body().getSessions();
+                if(response.body() != null) {
+
+                    List<Sessions> receivedData = response.body().getSessions();
+                    ArrayList<Sessions> filteredData = new ArrayList<>();
+
+                    for(int i = 0;i < receivedData.size();i++)
+                    {
+                        Sessions curr = receivedData.get(i);
+                        if(getAgeListFromDb().contains(curr.getMinAgeLimit().toString()) &&
+                                getFeesListFromDb().contains(curr.getFeeType()) &&
+                                getVaccineListFromDb().contains(curr.getVaccine()))
+                            filteredData.add(curr);
+                    }
+                    if(!filteredData.isEmpty())
+                        dataSet = filteredData;
+                    else
+                        dataSet = receivedData;
+                }
             }
 
             @Override
@@ -105,8 +122,24 @@ public class MainRepository {
             public void onResponse(Call<SessionClass> call, Response<SessionClass> response) {
                 Log.i("networkRequest","Inside onResponse ");
 //                Log.i("networkRequest", ""+response.body().getSessions().get(0).getAddress());
-                if(response.body() != null)
-                    data.setValue(response.body().getSessions());
+                if(response.body() != null) {
+
+                    List<Sessions> receivedData = response.body().getSessions();
+                    ArrayList<Sessions> filteredData = new ArrayList<>();
+
+                    for(int i = 0;i < receivedData.size();i++)
+                    {
+                        Sessions curr = receivedData.get(i);
+                        if(getAgeListFromDb().contains(curr.getMinAgeLimit().toString()) &&
+                        getFeesListFromDb().contains(curr.getFeeType()) &&
+                        getVaccineListFromDb().contains(curr.getVaccine()))
+                            filteredData.add(curr);
+                    }
+                    if(!filteredData.isEmpty())
+                        data.setValue(filteredData);
+                    else
+                        data.setValue(receivedData);
+                }
             }
 
             @Override
@@ -132,15 +165,36 @@ public class MainRepository {
     public String getPincodeFromDb()
     {
         if(getUserFromDb()!=null)
-        return String.valueOf(getUserFromDb().pincode);
+            return String.valueOf(getUserFromDb().pincode);
         return "";
     }
 
     public String getUsernameFromDb()
     {
         if(getUserFromDb()!=null)
-        return String.valueOf(getUserFromDb().username);
+            return String.valueOf(getUserFromDb().username);
         return "";
+    }
+
+    public ArrayList<String> getVaccineListFromDb()
+    {
+        if(getUserFromDb()!=null)
+            return getUserFromDb().vaccines;
+        return null;
+    }
+
+    public ArrayList<String> getAgeListFromDb()
+    {
+        if(getUserFromDb()!=null)
+            return getUserFromDb().age;
+        return null;
+    }
+
+    public ArrayList<String> getFeesListFromDb()
+    {
+        if(getUserFromDb()!=null)
+            return getUserFromDb().fees;
+        return null;
     }
 
 
