@@ -14,7 +14,6 @@ import com.example.cowinvaccinenotifier.R;
 public class NotificationUtil{
 
     private static int NOTIFICATION_ID = 0;
-    private int REQUEST_CODE = 0;
 
 
     public static void sendNotification(String messageBody, Context context)

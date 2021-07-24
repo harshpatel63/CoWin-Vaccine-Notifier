@@ -17,4 +17,6 @@
     <string name="covaxin">COVAXIN</string>
     <string name="moderna">MODERNA</string>
     <string name="sputnik_v">SPUTNIK-V</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 </resources>

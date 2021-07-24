@@ -24,6 +24,8 @@ import com.example.cowinvaccinenotifier.databinding.FragmentHomeBinding;
 import com.example.cowinvaccinenotifier.network.properties.Sessions;
 import com.example.cowinvaccinenotifier.service.TrackingService;
 import java.util.List;
+
+import static androidx.core.content.ContextCompat.getDrawable;
 import static androidx.core.content.ContextCompat.startForegroundService;
 
 public class HomeFragment extends Fragment {
@@ -106,10 +108,14 @@ public class HomeFragment extends Fragment {
         homeViewModel.getTrackingStatus().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(aBoolean == null || !aBoolean)
-                    binding.buttonService.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-                else
-                    binding.buttonService.setImageResource(R.drawable.ic_baseline_stop_24);
+                if(aBoolean == null || !aBoolean) {
+                    binding.buttonService.setIcon(getDrawable(getContext(), R.drawable.ic_baseline_play_arrow_24));
+                    binding.buttonService.setText(R.string.start);
+                }
+                else {
+                    binding.buttonService.setIcon(getDrawable(getContext(), R.drawable.ic_baseline_stop_24));
+                    binding.buttonService.setText(R.string.stop);
+                }
             }
         });
 
