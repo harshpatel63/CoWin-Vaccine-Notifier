@@ -34,7 +34,7 @@ public class NotificationUtil{
                     context,
                     context.getString(R.string.cowin_service_notification_channel_id)
             );
-            builder.setContentTitle("notification")
+            builder.setContentTitle("Vaccine slots found")
             .setContentText(messageBody)
             .setSmallIcon(R.drawable.ic_baseline_done_24)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
