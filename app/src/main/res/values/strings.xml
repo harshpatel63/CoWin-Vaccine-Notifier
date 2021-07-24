@@ -19,4 +19,14 @@
     <string name="sputnik_v">SPUTNIK-V</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="_18plus">18+</string>
+    <string name="_45plus">45+</string>
+    <string name="eighteen">18</string>
+    <string name="fortyFive">45</string>
+    <string name="select_fee">Select Fee</string>
+    <string name="filter_options">Filter Options</string>
+    <string name="select_age">Select Age</string>
+    <string name="free">Free</string>
+    <string name="paid">Paid</string>
+    <string name="select_vaccine">Select Vaccine</string>
 </resources>

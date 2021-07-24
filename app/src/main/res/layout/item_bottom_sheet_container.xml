@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:id="@+id/layoutMisc"
     android:elevation="50dp"
     android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toTopOf="@id/textFilterOptions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="#ffffff"/>
+            app:tint="#8c8c8c"/>
 
     <TextView
         android:id="@+id/textFilterOptions"
@@ -34,14 +34,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Filter Options"
+        android:text="@string/filter_options"
         android:textSize="18sp"
         android:textColor="?android:attr/textColorPrimary"/>
         <TextView
             android:id="@+id/textSelectAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Age"
+            android:text="@string/select_age"
             android:layout_margin="10dp"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintTop_toBottomOf="@id/textFilterOptions"
@@ -53,7 +53,7 @@
             android:id="@+id/checkboxEighteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="18+"
+            android:text="@string/_18plus"
             android:layout_margin="10dp"
             android:textColor="?android:attr/textColorPrimary"
             android:checked="true"
@@ -63,7 +63,7 @@
             android:id="@+id/checkboxFortyFive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45+"
+            android:text="@string/_45plus"
             android:layout_margin="10dp"
             android:textColor="?android:attr/textColorPrimary"
             android:checked="true"
@@ -74,7 +74,7 @@
             android:id="@+id/textSelectFee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Fee"
+            android:text="@string/select_fee"
             android:layout_margin="10dp"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintTop_toTopOf="@id/checkboxFree"
@@ -86,7 +86,7 @@
             android:id="@+id/checkboxFree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Free"
+            android:text="@string/free"
             android:layout_margin="10dp"
             android:textColor="?android:attr/textColorPrimary"
             android:checked="true"
@@ -96,7 +96,7 @@
             android:id="@+id/checkboxPaid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paid"
+            android:text="@string/paid"
             android:layout_margin="10dp"
             android:textColor="?android:attr/textColorPrimary"
             android:checked="true"
@@ -108,7 +108,7 @@
             android:id="@+id/textSelectVaccine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Vaccine"
+            android:text="@string/select_vaccine"
             android:layout_margin="10dp"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintTop_toTopOf="@id/checkboxCovishield"

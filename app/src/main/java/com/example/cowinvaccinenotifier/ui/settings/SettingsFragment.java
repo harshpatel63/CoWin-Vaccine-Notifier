@@ -84,19 +84,19 @@ public class SettingsFragment extends Fragment {
                     pincode = Integer.parseInt(pincodeStr);
                 } catch (NumberFormatException e)
                 {
-                    Log.i("SettingsFragment", "exeception caught");
+                    Log.i("SettingsFragment", "exception caught");
                 }
 
                 String nameStr = Objects.requireNonNull(binding.editName.getText()).toString();
 
                 if(bs.checkboxEighteen.isChecked())
-                    ageList.add("18");
+                    ageList.add(getString(R.string.eighteen));
                 if(bs.checkboxFortyFive.isChecked())
-                    ageList.add("45");
+                    ageList.add(getString(R.string.fortyFive));
                 if(bs.checkboxFree.isChecked())
-                    feeList.add("Free");
+                    feeList.add(getString(R.string.free));
                 if(bs.checkboxPaid.isChecked())
-                    feeList.add("Paid");
+                    feeList.add(getString(R.string.paid));
                 if(bs.checkboxCovishield.isChecked())
                     vaccineList.add(getString(R.string.covishield));
                 if(bs.checkboxCovaxin.isChecked())
@@ -158,10 +158,10 @@ public class SettingsFragment extends Fragment {
 
         }
         else {
-            bs.checkboxEighteen.setChecked(ageList.contains("18"));
-            bs.checkboxFortyFive.setChecked(ageList.contains("45"));
-            bs.checkboxFree.setChecked(feeList.contains("Free"));
-            bs.checkboxPaid.setChecked(feeList.contains("Paid"));
+            bs.checkboxEighteen.setChecked(ageList.contains(getString(R.string.eighteen)));
+            bs.checkboxFortyFive.setChecked(ageList.contains(getString(R.string.fortyFive)));
+            bs.checkboxFree.setChecked(feeList.contains(getString(R.string.free)));
+            bs.checkboxPaid.setChecked(feeList.contains(getString(R.string.paid)));
             bs.checkboxCovishield.setChecked(vaccineList.contains(getString(R.string.covishield)));
             bs.checkboxCovaxin.setChecked(vaccineList.contains(getString(R.string.covaxin)));
             bs.checkboxModerna.setChecked(vaccineList.contains(getString(R.string.moderna)));
